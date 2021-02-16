@@ -32,8 +32,8 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo
                 .AddInMemoryIdentityResources(IdentityResources.Get())
                 .AddMembershipService(new MembershipOptions
                 {
-                    ConnectionString = "Data Source=localhost\\SQLEXPRESS01;Initial Catalog=cms-sitecore-102-xp0_Core;User ID=securityuser;Password=8SurimpVx7Ze6qYF6sxC",
-                    ApplicationName = "sitecore",
+                    ConnectionString = "Data Source=localhost;Initial Catalog=Membership;Integrated Security=True",
+                    ApplicationName = "Test",
                     UseRoleProviderSource = true,
                     MaxInvalidPasswordAttempts = 5
                 });
