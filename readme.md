@@ -1,70 +1,11 @@
-# IdentityServer3.Contrib.Membership
-
-[![Build status](https://ci.appveyor.com/api/projects/status/avdpiba1rj8ce59h/branch/master?svg=true)](https://ci.appveyor.com/project/wwwlicious/identityserver-contrib-membership/branch/master)
-[![NuGet version](https://badge.fury.io/nu/IdentityServer3.Contrib.Membership.svg)](https://badge.fury.io/nu/IdentityServer3.Contrib.Membership)
+# IdentityServer4.Contrib.Membership
 
 ## ASP.NET 2.0 Membership Database as Identity Server User Store
 Identity Server is a framework and doesn't provide implementations of user data sources out of the box.
 If you have an existing ASP.NET 2.0 Membership Database containing user data for existing systems then you can install the following package:
 
-```powershell
-PM> Install-Package IdentityServer3.Contrib.Membership
-```
-
-To add the plugin, add the following to the OWIN startup class of your IdentityServer instance:
-```csharp
-public void Configuration(IAppBuilder app)
-{
-    var factory = new IdentityServerServiceFactory();        
-    ...
-    factory.UseMembershipService(
-        new MembershipOptions
-        {
-                ConnectionString = "...",   // Membership database connection string
-                ApplicationName = "..."     // Membership Application Name
-        });        
-    ...
-}
-```
-
 This will validate user logins and passwords against an existing database.  No support is provided for maintaining users and it is not recommended that you use this for a new implementation. 
-IdentityServer provides a [plugin](https://github.com/IdentityServer/IdentityServer3.AspNetIdentity) that supports [ASP.NET Identity](http://www.asp.net/identity).
-
-## Overview
-Project IdentityServer3.Membership is an implementation of a IUserService that authenticates against an existing ASP.NET 2.0 Membership database without having to use the SqlMembershipProvider.
-To add this to the OWIN startup class of an IdentityServer instance add the following to the Configuration method:
-
-```csharp
-public void Configuration(IAppBuilder app)
-{
-    var factory = new IdentityServerServiceFactory();
-    
-    ...
-    factory.UseMembershipService(
-        new MembershipOptions
-        {
-            ConnectionString = "Data Source=localhost;Initial Catalog=Membership;Integrated Security=True",
-            ApplicationName = "/"
-        });
-        
-    ...
-}
-```
-
-## IdentityServer3.Contrib.Membership.Demo
-A demo project that authenticates a [ServiceStack](https://servicestack.net/) razor-based Client App using [IdentityServer](https://identityserver.github.io/)
-using an ASP.NET Membership Database for User data.
-
-## Overview
-This demo project bring in the various Identity Server and Service Stack plugins available in this Solution, namely:
-* IdentityServer3.Contrib.Membership - An IdentityServer plugin that stores user data
-* IdentityServer3.Contrib.ServiceStack - An IdentityServer plugin that supports impersonation authentication of a ServiceStack instance using IdentityServer
-* ServiceStack.IdentityServerAuthProvider - A ServiceStack AuthProvider that authenticates a user against an IdentityServer instance
-
-When the project starts, you should be presented with a simple ServiceStack web app with a link that redirects to a secure service in ServiceStack. When you select the link you should be redirected to the IdentityServer instance that prompts you for login details.  Login using username "test@test.com" with password "password123".  You should then be redirected back to the ServiceStack web app and have access to the secure service (with Authenticate attribute) which displays the secure message.
-
-### Prerequisites
-* Create a SQL Server database called "Membership" using aspnet_regsql.exe (update app.config with the correct connectionString).  See below for instructions.
+IdentityServer provides a [plugin](https://github.com/IdentityServer/IdentityServer4) that supports [ASP.NET Identity](http://www.asp.net/identity).
 
 #### Creating an empty ASP.NET 2.0 Membership database
 To create an empty ASP.NET 2.0 Membership database, run the following command:
@@ -72,4 +13,4 @@ To create an empty ASP.NET 2.0 Membership database, run the following command:
 
 When the wizard opens, select next then "Configure SQL Server for application services" then next again. Select the Server instance on which the database will run and give the Database name "Membership" then continue.
 
-The sample code can be viewed [here](/samples/IdentityServer3.Contrib.Membership.Demo)
+The sample code can be viewed [here](/samples/IdentityServer4.Contrib.Membership.IdsvrDemo)
