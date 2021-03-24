@@ -2,7 +2,7 @@
 #tool "nuget:?package=GitVersion.CommandLine&version=5.6.6"
 #tool "nuget:?package=gitreleasemanager&version=0.7.1"
 #tool "nuget:?package=gitlink&version=2.4.0"
-#addin "nuget:?package=Cake.Incubator&version=5.2.0"
+#addin "nuget:?package=Cake.Incubator&version=6.0.0"
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -99,7 +99,7 @@ Task("Build")
             .WithProperty("Version", semVersion)
             .WithProperty("PackageVersion", gitVersionResults.MajorMinorPatch)
             .WithProperty("PackageOutputPath", MakeAbsolute(nugetPackageDir).FullPath)
-            .UseToolVersion(MSBuildToolVersion.VS2017)
+            .UseToolVersion(MSBuildToolVersion.VS2019)
             .SetNodeReuse(false);
 
             // setup binary logging for solution to artifacts dir
