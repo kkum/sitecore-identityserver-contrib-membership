@@ -15,7 +15,7 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Controllers
     using Models;
     using Services;
     using Stores;
-    using Extensions;
+    using System;
 
     /// <summary>
     /// This is a sample login controller taken from the original IdentityServer4 <a href="https://github.com/IdentityServer/IdentityServer4.Samples/">Samples.</a>
@@ -63,7 +63,10 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Controllers
                     // issue authentication cookie with subject ID and username
                     var user = await membershipService.GetUserAsync(model.Username);
 
-                    await HttpContext.SignInAsync(user.GetSubjectId(), ClaimsPrincipal.Current);
+                    await HttpContext.SignInAsync(new IdentityServerUser(user.GetSubjectId())
+                    {
+                        DisplayName = user.UserName
+                    });
 
                     // make sure the returnUrl is still valid, and if yes - redirect back to authorize endpoint
                     if (interaction.IsValidReturnUrl(model.ReturnUrl))
@@ -85,9 +88,9 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Controllers
         async Task<LoginViewModel> BuildLoginViewModelAsync(string returnUrl, AuthorizationRequest context)
         {
             var allowLocal = true;
-            if (context?.ClientId != null)
+            if (context?.Client.ClientId != null)
             {
-                var client = await clientStore.FindEnabledClientByIdAsync(context.ClientId);
+                var client = await clientStore.FindEnabledClientByIdAsync(context.Client.ClientId);
                 if (client != null)
                 {
                     allowLocal = client.EnableLocalLogin;

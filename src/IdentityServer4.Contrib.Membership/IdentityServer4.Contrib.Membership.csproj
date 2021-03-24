@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <Copyright>Copyright © 2017 onwards</Copyright>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <Configurations>Debug;Release</Configurations>
-    <NetStandardImplicitPackageVersion>2.0.0</NetStandardImplicitPackageVersion>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>IdentityServer4.Contrib.Membership</RootNamespace>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageProjectUrl>https://github.com/sma73648/identityserver-contrib-membership</PackageProjectUrl>
     <PackageLicenseUrl>https://www.mozilla.org/en-US/MPL/2.0/</PackageLicenseUrl>
@@ -15,12 +15,20 @@
     <Description>An IdentityServer plugin for authenticating against a ASP.NET 2.0 Membership Database</Description>
     <PackageTags>IdentityServer</PackageTags>
     <PackageReleaseNotes>https://github.com/sma73648/identityserver-contrib-membership/releases</PackageReleaseNotes>
-    <Version>$(Version)</Version>
+    <Version>6.0.0</Version>
     <PackageOutputPath>$(PackageOutputPath)</PackageOutputPath>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+    <FileVersion>6.0.0.0</FileVersion>
   </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="IdentityServer4" Version="2.3.2" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
+    <PackageReference Include="IdentityServer4" Version="4.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.5" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
   </ItemGroup>
+
 </Project>
