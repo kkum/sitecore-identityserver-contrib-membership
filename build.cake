@@ -1,8 +1,8 @@
 #tool "nuget:?package=xunit.runner.console&version=2.3.1"
-#tool "nuget:?package=GitVersion.CommandLine&version=3.6.5"
+#tool "nuget:?package=GitVersion.CommandLine&version=5.6.6"
 #tool "nuget:?package=gitreleasemanager&version=0.7.1"
 #tool "nuget:?package=gitlink&version=2.4.0"
-#addin "nuget:?package=Cake.Incubator&version=3.0.0"
+#addin "nuget:?package=Cake.Incubator&version=5.2.0"
 
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -10,6 +10,7 @@
 var envBuildNumber = EnvironmentVariable<int>("APPVEYOR_BUILD_NUMBER", 0);
 var gitHubUserName = EnvironmentVariable("GITHUB_USERNAME");
 var gitHubPassword = EnvironmentVariable("GITHUB_PASSWORD");
+var githubAccessToken = EnvironmentVariable("GITHUB_ACCESS_TOKEN");
 var nugetSourceUrl = EnvironmentVariable("NUGET_SOURCE");
 var nugetApiKey = EnvironmentVariable("NUGET_API_KEY");
 
@@ -139,7 +140,7 @@ Task("Create-Release-Notes")
     Information("Creating release notes for {0}", semVersion);
     gitHubUserName.ThrowIfNull(nameof(gitHubUserName));
     gitHubPassword.ThrowIfNull(nameof(gitHubPassword));
-    GitReleaseManagerCreate(gitHubUserName, gitHubPassword, gitHubRepositoryOwner, gitHubRepositoryName, new GitReleaseManagerCreateSettings {
+    GitReleaseManagerCreate(githubAccessToken, gitHubRepositoryOwner, gitHubRepositoryName, new GitReleaseManagerCreateSettings {
                 Milestone         = gitVersionResults.MajorMinorPatch,
                 Name              = gitVersionResults.MajorMinorPatch,
                 Prerelease        = false,
@@ -157,7 +158,7 @@ Task("Export-Release-Notes")
     gitHubUserName.ThrowIfNull(nameof(gitHubUserName));
     gitHubPassword.ThrowIfNull(nameof(gitHubPassword));
 
-    GitReleaseManagerExport(gitHubUserName, gitHubPassword, gitHubRepositoryOwner, gitHubRepositoryName, releaseNotesPath, 
+    GitReleaseManagerExport(githubAccessToken, gitHubRepositoryOwner, gitHubRepositoryName, releaseNotesPath, 
     new GitReleaseManagerExportSettings {
         TagName = gitVersionResults.MajorMinorPatch
     });
@@ -174,11 +175,11 @@ Task("Publish-GitHub-Release")
     // upload packages as assets
     foreach(var package in GetFiles(nugetPackageDir.Path + "/*"))
     {
-        GitReleaseManagerAddAssets(gitHubUserName, gitHubPassword, gitHubRepositoryOwner, gitHubRepositoryName, gitVersionResults.MajorMinorPatch, package.ToString());
+        GitReleaseManagerAddAssets(githubAccessToken, gitHubRepositoryOwner, gitHubRepositoryName, gitVersionResults.MajorMinorPatch, package.ToString());
     }
 
     // close the release
-    GitReleaseManagerClose(gitHubUserName, gitHubPassword, gitHubRepositoryOwner, gitHubRepositoryName, gitVersionResults.MajorMinorPatch);
+    GitReleaseManagerClose(githubAccessToken, gitHubRepositoryOwner, gitHubRepositoryName, gitVersionResults.MajorMinorPatch);
 });
 
 Task("Publish-Nuget-Packages")
