@@ -31,8 +31,8 @@ var releaseNotesPath    = rootPath.CombineWithFilePath("CHANGELOG.md");
 
 // project specific
 var solutionFile        = srcDir + File("IdentityServer.Contrib.Membership.sln");
-var gitHubRepositoryOwner = "sma73648";
-var gitHubRepositoryName = "identityserver-contrib-membership";
+var gitHubRepositoryOwner = "Sitecore";
+var gitHubRepositoryName = "sitecore-identityserver-contrib-membershi";
 
 var isLocalBuild = BuildSystem.IsLocalBuild;
 var isPullRequest = BuildSystem.AppVeyor.Environment.PullRequest.IsPullRequest;
@@ -42,8 +42,8 @@ var isHotFixBranch = BuildSystem.AppVeyor.Environment.Repository.Branch.StartsWi
 var isTagged = BuildSystem.AppVeyor.Environment.Repository.Tag.IsTag && !BuildSystem.AppVeyor.Environment.Repository.Tag.Name.IsNullOrEmpty();
 var publishingError = false;
 
-var shouldPublishNuGet = (!isLocalBuild && !isPullRequest && (isMasterBranch || isReleaseBranch || isHotFixBranch) && isTagged);
-var shouldPublishGitHub = shouldPublishNuGet;
+var shouldPublishNuGet = false;
+var shouldPublishGitHub = (!isLocalBuild && !isPullRequest && (isMasterBranch || isReleaseBranch || isHotFixBranch) && isTagged);
 
 var gitVersionResults   = GitVersion(new GitVersionSettings { UpdateAssemblyInfo = false });
 var semVersion          = $"{gitVersionResults.MajorMinorPatch}.{buildNumber}";

@@ -3,22 +3,22 @@
   <PropertyGroup>
     <Copyright>Copyright © 2017 onwards</Copyright>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
     <RootNamespace>IdentityServer4.Contrib.Membership</RootNamespace>
-	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Sitecore.IdentityServer4.Contrib.Membership</PackageId>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageProjectUrl>https://github.com/sma73648/identityserver-contrib-membership</PackageProjectUrl>
+    <PackageProjectUrl>>https://github.com/Sitecore/sitecore-identityserver-contrib-membership</PackageProjectUrl>
     <PackageLicenseUrl>https://www.mozilla.org/en-US/MPL/2.0/</PackageLicenseUrl>
     <PackageIconUrl>https://identityserver.github.io/Documentation/assets/images/icons/IDserver_icon128.jpg</PackageIconUrl>
-    <RepositoryUrl>https://github.com/sma73648/identityserver-contrib-membership</RepositoryUrl>
+    <RepositoryUrl>>https://github.com/Sitecore/sitecore-identityserver-contrib-membership</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Authors>Stuart Banks, Scott Mackay @wwwlicious</Authors>
+    <Authors>Stuart Banks, Scott Mackay @wwwlicious, Sitecore Corporation A/S.</Authors>
     <Description>An IdentityServer plugin for authenticating against a ASP.NET 2.0 Membership Database</Description>
     <PackageTags>IdentityServer</PackageTags>
-    <PackageReleaseNotes>https://github.com/sma73648/identityserver-contrib-membership/releases</PackageReleaseNotes>
-    <Version>6.0.0</Version>
+    <PackageReleaseNotes>https://github.com/Sitecore/sitecore-identityserver-contrib-membership/releases</PackageReleaseNotes>
+    <Version>$(Version)</Version>
     <PackageOutputPath>$(PackageOutputPath)</PackageOutputPath>
-    <AssemblyVersion>6.0.0.0</AssemblyVersion>
-    <FileVersion>6.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
