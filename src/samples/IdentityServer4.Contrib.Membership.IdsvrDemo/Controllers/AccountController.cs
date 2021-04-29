@@ -1,21 +1,22 @@
 ﻿// This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Controllers
 {
     using System.Security.Claims;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
     using Helpers;
-    using IdentityServer4.Models;
     using Interfaces;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Models;
-    using Services;
-    using Stores;
-    using System;
+    using Duende.IdentityServer;
+    using Duende.IdentityServer.Models;
+    using Duende.IdentityServer.Services;
+    using Duende.IdentityServer.Stores;
 
     /// <summary>
     /// This is a sample login controller taken from the original IdentityServer4 <a href="https://github.com/IdentityServer/IdentityServer4.Samples/">Samples.</a>
