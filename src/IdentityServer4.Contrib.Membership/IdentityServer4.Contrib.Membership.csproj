@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Copyright>Copyright © 2017 onwards</Copyright>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Configurations>Debug;Release</Configurations>
     <RootNamespace>IdentityServer4.Contrib.Membership</RootNamespace>
     <PackageId>Sitecore.IdentityServer4.Contrib.Membership</PackageId>
@@ -17,12 +17,14 @@
     <Description>An IdentityServer plugin for authenticating against a ASP.NET 2.0 Membership Database</Description>
     <PackageTags>IdentityServer</PackageTags>
     <PackageReleaseNotes>https://github.com/Sitecore/sitecore-identityserver-contrib-membership/releases</PackageReleaseNotes>
-    <Version>$(Version)</Version>
+    <Version>7.0.0</Version>
     <PackageOutputPath>$(PackageOutputPath)</PackageOutputPath>
+    <AssemblyVersion>7.0.0.0</AssemblyVersion>
+    <FileVersion>7.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Duende.IdentityServer" Version="5.1.1" />
+    <PackageReference Include="Duende.IdentityServer" Version="6.0.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
