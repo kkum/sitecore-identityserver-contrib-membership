@@ -1,6 +1,7 @@
 ﻿// This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 namespace IdentityServer4.Contrib.Membership
 {
     using System;
@@ -8,13 +9,13 @@ namespace IdentityServer4.Contrib.Membership
     using System.Threading.Tasks;
     using Helpers;
     using Interfaces;
-    using Models;
-    using Services;
-    using Extensions;
+    using Duende.IdentityServer.Extensions;
+    using Duende.IdentityServer.Models;
+    using Duende.IdentityServer.Services;
     using IMembershipClaimsService = Interfaces.IMembershipClaimsService;
 
     /// <summary>
-    /// Implementation of the Identity Server 4 Profile Service <see cref="IdentityServer4.Services.IProfileService"/> 
+    /// Implementation of the Identity Server 4 Profile Service <see cref="Duende.IdentityServer.Services.IProfileService"/> 
     /// that queries the Membership Database in order to transform the Membership Data into Claims
     /// </summary>
     public class MembershipProfileService : IProfileService

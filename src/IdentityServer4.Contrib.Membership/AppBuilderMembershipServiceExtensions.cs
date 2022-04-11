@@ -7,7 +7,7 @@ namespace IdentityServer4.Contrib.Membership
     using DataAccess;
     using Interfaces;
     using Microsoft.Extensions.DependencyInjection;
-    using Services;
+    using Duende.IdentityServer.Services;
 
     public static class AppBuilderMembershipServiceExtensions
     {
