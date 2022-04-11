@@ -17,10 +17,8 @@
     <Description>An IdentityServer plugin for authenticating against a ASP.NET 2.0 Membership Database</Description>
     <PackageTags>IdentityServer</PackageTags>
     <PackageReleaseNotes>https://github.com/Sitecore/sitecore-identityserver-contrib-membership/releases</PackageReleaseNotes>
-    <Version>7.0.0</Version>
+    <Version>$(Version)</Version>
     <PackageOutputPath>$(PackageOutputPath)</PackageOutputPath>
-    <AssemblyVersion>7.0.0.0</AssemblyVersion>
-    <FileVersion>7.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
