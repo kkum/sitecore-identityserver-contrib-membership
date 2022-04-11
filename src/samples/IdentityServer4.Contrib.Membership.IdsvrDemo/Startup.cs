@@ -2,8 +2,9 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 using System.Collections.Generic;
+using Duende.IdentityServer;
 using IdentityModel;
-using IdentityServer4.Models;
+using Duende.IdentityServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -117,9 +118,9 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo
         {
             return new List<IdentityResource>
             {
-                new IdentityServer4.Models.IdentityResources.OpenId(),
-                new IdentityServer4.Models.IdentityResources.Profile(),
-                new IdentityServer4.Models.IdentityResources.Email(),
+                new Duende.IdentityServer.Models.IdentityResources.OpenId(),
+                new Duende.IdentityServer.Models.IdentityResources.Profile(),
+                new Duende.IdentityServer.Models.IdentityResources.Email(),
                 new IdentityResource
                 {
                     Name = "ServiceStack.SelfHost",

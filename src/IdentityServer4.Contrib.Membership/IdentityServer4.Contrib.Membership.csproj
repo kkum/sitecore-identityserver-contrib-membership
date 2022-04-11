@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <Copyright>Copyright © 2017 onwards</Copyright>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Configurations>Debug;Release</Configurations>
     <RootNamespace>IdentityServer4.Contrib.Membership</RootNamespace>
     <PackageId>Sitecore.IdentityServer4.Contrib.Membership</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageProjectUrl>>https://github.com/Sitecore/sitecore-identityserver-contrib-membership</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Sitecore/sitecore-identityserver-contrib-membership</PackageProjectUrl>
     <PackageLicenseUrl>https://www.mozilla.org/en-US/MPL/2.0/</PackageLicenseUrl>
     <PackageIconUrl>https://identityserver.github.io/Documentation/assets/images/icons/IDserver_icon128.jpg</PackageIconUrl>
     <RepositoryUrl>https://github.com/Sitecore/sitecore-identityserver-contrib-membership</RepositoryUrl>
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityServer4" Version="4.1.1" />
+    <PackageReference Include="Duende.IdentityServer" Version="6.0.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.5" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
