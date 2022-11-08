@@ -80,6 +80,18 @@ namespace IdentityServer4.Contrib.Membership.DataAccess
                 })).ConfigureAwait(false)).SingleOrDefault();
         }
 
+        /// <summary>Find user details by Email</summary>
+        /// <param name="email">email</param>
+        /// <returns>Membership entry</returns>
+        public async Task<String> FindUserNameByEmail(string email)
+        {
+            return (await context.Execute(new QueryProc<String>("aspnet_Membership_GetUserByEmail")
+                .Param("@ApplicationName", options.ApplicationName)
+                .Param("@Email", email)
+                .Map(reader => reader.Get<string>("UserName")))
+                .ConfigureAwait(false)).SingleOrDefault();
+        }
+
         /// <summary>Find password data for the Username</summary>
         /// <param name="username">Username</param>
         /// <returns>Membership Security</returns>
@@ -139,5 +151,6 @@ namespace IdentityServer4.Contrib.Membership.DataAccess
                 .Param("@PasswordFormat", passwordFormat)
             );
         }
+
     }
 }

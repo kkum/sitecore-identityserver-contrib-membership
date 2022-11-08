@@ -20,11 +20,24 @@ namespace IdentityServer4.Contrib.Membership.Interfaces
         /// <returns>Membership User</returns>
         Task<MembershipUser> GetUserAsync(string username);
 
+
+        /// <summary>Gets a Username by their Email</summary>
+        /// <param name="email">email</param>
+        /// <returns>Username</returns>
+        Task<string> GetUsernameAsync(string email);
+
         /// <summary>Validates the given password is valid for a user</summary>
         /// <param name="username">Username</param>
         /// <param name="password">Password</param>
         /// <returns>True if valid, False if not</returns>
         Task<bool> ValidateUser(string username, string password);
+
+        /// <summary>
+        /// Validates the given email identifies an approved user
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>True if a user exists and is approved, False if the user does not exists or is not approved</returns>
+        Task<bool> ValidateEmailAsync(string email);
 
         /// <summary>Updates the password for the given username</summary>
         /// <param name="username"></param>

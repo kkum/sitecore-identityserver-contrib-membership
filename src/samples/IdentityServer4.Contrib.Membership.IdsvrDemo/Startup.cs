@@ -26,17 +26,20 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo
         {
             services.AddControllersWithViews();
 
+            services.AddDataProtection();
+
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential(persistKey: false)
                 .AddInMemoryClients(Clients.Get())
                 .AddInMemoryIdentityResources(IdentityResources.Get())
                 .AddMembershipService(new MembershipOptions
                 {
-                    ConnectionString = "Data Source=localhost;Initial Catalog=Membership;Integrated Security=True",
-                    ApplicationName = "Test",
+                    //ConnectionString = "Data Source=localhost;Initial Catalog=Membership;Integrated Security=True",
+                    ConnectionString = Configuration.GetConnectionString("Membership"),
+                    ApplicationName = "sitecore",
                     UseRoleProviderSource = true,
-                    MaxInvalidPasswordAttempts = 5
-                });
+                    MaxInvalidPasswordAttempts = 5,
+                }) ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

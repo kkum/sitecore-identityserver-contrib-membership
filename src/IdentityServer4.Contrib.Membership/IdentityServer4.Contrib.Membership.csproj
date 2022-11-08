@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Configurations>Debug;Release</Configurations>
     <RootNamespace>IdentityServer4.Contrib.Membership</RootNamespace>
-    <PackageId>Sitecore.IdentityServer4.Contrib.Membership</PackageId>
+    <PackageId>Sitecore.IdentityServer4.Contrib.MembershipExt</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageProjectUrl>>https://github.com/Sitecore/sitecore-identityserver-contrib-membership</PackageProjectUrl>
@@ -13,7 +13,7 @@
     <PackageIconUrl>https://identityserver.github.io/Documentation/assets/images/icons/IDserver_icon128.jpg</PackageIconUrl>
     <RepositoryUrl>https://github.com/Sitecore/sitecore-identityserver-contrib-membership</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Authors>Stuart Banks, Scott Mackay @wwwlicious, Sitecore Corporation A/S.</Authors>
+    <Authors>Stuart Banks, Scott Mackay @wwwlicious, Sitecore Corporation A/S., Kumar Kirpalani</Authors>
     <Description>An IdentityServer plugin for authenticating against a ASP.NET 2.0 Membership Database</Description>
     <PackageTags>IdentityServer</PackageTags>
     <PackageReleaseNotes>https://github.com/Sitecore/sitecore-identityserver-contrib-membership/releases</PackageReleaseNotes>

@@ -117,5 +117,19 @@ namespace IdentityServer4.Contrib.Membership
 
             await membershipRepository.UpdatePassword(username, encryptedPassword, salt, 1);
         }
+
+        Task<string> IMembershipService.GetUsernameAsync(string email)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<bool> IMembershipService.ValidateEmailAsync(string email)
+        {
+            var userName = membershipRepository.FindUserNameByEmail(email);
+            throw new NotImplementedException();
+            return Task.
+        }
+
+ 
     }
 }

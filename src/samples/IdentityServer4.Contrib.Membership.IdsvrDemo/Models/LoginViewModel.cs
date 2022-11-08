@@ -9,5 +9,7 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Models
     public class LoginViewModel : LoginInputModel
     {
         public bool EnableLocalLogin { get; set; }
+
+        public bool IsEmailValid { get; set; }
     }
 }

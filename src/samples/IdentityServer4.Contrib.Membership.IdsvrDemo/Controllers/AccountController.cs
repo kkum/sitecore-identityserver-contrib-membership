@@ -53,7 +53,7 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Controllers
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginInputModel model)
+        public async Task<IActionResult> Login(LoginInputModel model, string button)
         {
             if (ModelState.IsValid)
             {
