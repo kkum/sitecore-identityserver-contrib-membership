@@ -1,0 +1,47 @@
+﻿@model IdentityServer4.Contrib.Membership.IdsvrDemo.Models.ResetPasswordViewModel
+
+<div class="login-page">
+    <div class="page-header">
+        <h1>Login</h1>
+    </div>
+
+    @Html.Partial("_ValidationSummary")
+
+    <div class="row">
+
+        @if (Model.EnablePasswordReset)
+        {
+            <div class="col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Mot de passe oublié</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <form asp-route="">
+                            <input type="hidden" asp-for="Purpose" />
+
+                            <fieldset>
+                                <div class="form-group">
+                                    <label asp-for="EmailAddress"></label>
+                                    <input class="form-control" placeholder="EmailAddress" asp-for="EmailAddress" type="email" disabled="disabled" autofocus />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password"></label>
+                                    <input class="form-control" placeholder="Password" asp-for="Password" type="password" autofocus />
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ConfirmPassword"></label>
+                                    <input class="form-control" placeholder="Confirm Password" asp-for="ConfirmPassword" type="password" autofocus />
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" name="button" value="reset">Next</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

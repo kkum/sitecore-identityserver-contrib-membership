@@ -10,6 +10,7 @@ namespace IdentityServer4.Contrib.Membership.ClientDemo
     using Microsoft.Extensions.Hosting;
     using Microsoft.AspNetCore.Authentication.Cookies;
     using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+    using Microsoft.IdentityModel.Logging;
 
     public class Startup
     {
@@ -55,6 +56,8 @@ namespace IdentityServer4.Contrib.Membership.ClientDemo
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            IdentityModelEventSource.ShowPII = true;
+
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseStaticFiles();

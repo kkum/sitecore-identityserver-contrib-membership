@@ -11,7 +11,7 @@
 
         @if (Model.EnableLocalLogin)
         {
-            if (Model.IsEmailValid)
+            if (Model.CanLogin)
             {
             <div class="col-sm-6">
                 <div class="panel panel-default">
@@ -22,12 +22,12 @@
 
                         <form asp-route="Login">
                             <input type="hidden" asp-for="ReturnUrl" />
-                                <input type="hidden" asp-for="Username" />
+                            <input type="hidden" asp-for="Username" />
 
                             <fieldset>
                                 <div class="form-group">
                                         <label asp-for="EmailAddress"></label>
-                                        <input class="form-control" placeholder="Email" asp-for="EmailAddress" autofocus />
+                                        <input class="form-control" placeholder="Email" asp-for="EmailAddress" autofocus disabled="disabled"/>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Password"></label>

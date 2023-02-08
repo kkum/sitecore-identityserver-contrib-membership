@@ -32,17 +32,36 @@ namespace IdentityServer4.Contrib.Membership.Interfaces
         /// <returns>True if valid, False if not</returns>
         Task<bool> ValidateUser(string username, string password);
 
-        /// <summary>
-        /// Validates the given email identifies an approved user
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns>True if a user exists and is approved, False if the user does not exists or is not approved</returns>
-        Task<bool> ValidateEmailAsync(string email);
+        ///// <summary>
+        ///// Validates the given email identifies an approved user
+        ///// </summary>
+        ///// <param name="email"></param>
+        ///// <returns>True if a user exists and is approved, False if the user does not exists or is not approved</returns>
+        //Task<bool> ValidateEmailAsync(string email);
 
         /// <summary>Updates the password for the given username</summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
         Task UpdatePassword(string username, string password);
+    
+        /// <summary>
+        /// Generate a Token for Reset Password
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="purpose"></param>
+        /// <param name="lifetimeInDays"></param>
+        /// <returns>the token</returns>
+        Task<string> GenerateResetPasswordTokenAsync(MembershipUser user, string purpose, double lifetimeInDays);
+
+        /// <summary>
+        /// Validates the password token
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="token"></param>
+        /// <param name="purpose"></param>
+        /// <returns>True if the token is Valid, False if not</returns>
+        Task<bool> ValidateResetPasswordTokenAsync(MembershipUser user, string token, string purpose);
     }
+
 }

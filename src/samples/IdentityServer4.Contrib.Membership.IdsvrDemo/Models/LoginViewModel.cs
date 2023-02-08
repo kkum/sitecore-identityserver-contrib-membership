@@ -10,6 +10,6 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Models
     {
         public bool EnableLocalLogin { get; set; }
 
-        public bool IsEmailValid { get; set; }
+        public bool CanLogin { get; set; }
     }
 }

@@ -4,12 +4,17 @@
 namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using IdentityServer4.Contrib.Membership.IdsvrDemo;
 
     public class EmailInputModel
     {
         [Required]
         [EmailAddress]
-        public string EmailAdress { get; set; }
+        public string EmailAddress { get; set; }
+
+        public ResetPasswordReason Purpose { get; set; }
+
+        public bool TokenExpired { get; set; }
 
     }
 }

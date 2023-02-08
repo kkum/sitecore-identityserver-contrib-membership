@@ -4,6 +4,7 @@
 namespace IdentityServer4.Contrib.Membership
 {
     using System;
+    using System.Security.Permissions;
 
     /// <summary>Membership User presented to Identity Server</summary>
     public class MembershipUser
@@ -31,5 +32,16 @@ namespace IdentityServer4.Contrib.Membership
 
         /// <summary>Password Changed</summary>
         public DateTime PasswordChanged { get; set; }
+
+        /// <summary>
+        /// if AccountCreated and PasswordChanged are equals
+        /// </summary>
+        public bool IsNewUser
+        {
+            get
+            {
+                return AccountCreated == PasswordChanged;
+            }
+        }
     }
 }

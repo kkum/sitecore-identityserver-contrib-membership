@@ -16,6 +16,8 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Controllers
     using Services;
     using Stores;
     using System;
+    using System.Security.Cryptography.X509Certificates;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
 
     /// <summary>
     /// This is a sample login controller taken from the original IdentityServer4 <a href="https://github.com/IdentityServer/IdentityServer4.Samples/">Samples.</a>
@@ -55,34 +57,78 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginInputModel model, string button)
         {
-            if (ModelState.IsValid)
+            LoginViewModel vm;
+            if (string.Equals(button, "validate", StringComparison.Ordinal))
             {
-                // validate username/password against in-memory store
-                if (await membershipService.ValidateUser(model.Username, model.Password))
+                ModelState.Remove("Username");
+                ModelState.Remove("Password");
+                if (ModelState.GetFieldValidationState("EmailAddress") == ModelValidationState.Valid)
                 {
-                    // issue authentication cookie with subject ID and username
-                    var user = await membershipService.GetUserAsync(model.Username);
+                    // Check domains ?
 
-                    await HttpContext.SignInAsync(new IdentityServerUser(user.GetSubjectId())
+                    //find user with the given email
+                    var username = await membershipService.GetUsernameAsync(model.EmailAddress);
+                    // 1. if the user exists
+                    if (null != username)
                     {
-                        DisplayName = user.UserName
-                    });
+                        var user = await membershipService.GetUserAsync(username);
+                        if (user.IsNewUser)
+                        {
+                            // Initialize Password
+                            return RedirectToAction("ValidateEmail", "Password", new { purpose = ResetPasswordReason.FirstConnection });
+                        }
+                        else if (user.IsApproved)
+                        {
+                            ModelState.ClearValidationState(nameof(LoginInputModel));
+                            model.Username = username;
+                            vm = await BuildLoginViewModelAsync(model, canLogin: true);
+                            return View(vm);
+                        }
+                    }
+                    // 2. if the user does not exists show error view
+                    else
+                    {
+                        ModelState.ClearValidationState(nameof(LoginInputModel));
+                        ModelState.AddModelError("", "Please contact your organism.");
+                    }
+                }
+            }
 
-                    // make sure the returnUrl is still valid, and if yes - redirect back to authorize endpoint
-                    if (interaction.IsValidReturnUrl(model.ReturnUrl))
+            if (string.Equals(button, "login", StringComparison.Ordinal))
+            {
+                ModelState.Remove("EmailAddress");
+                if (ModelState.IsValid)
+                {
+                    // validate username/password against in-memory store
+                    if (await membershipService.ValidateUser(model.Username, model.Password))
                     {
-                        return RedirectToLocal(model.ReturnUrl);
+                        // issue authentication cookie with subject ID and username
+                        var user = await membershipService.GetUserAsync(model.Username);
+
+                        await HttpContext.SignInAsync(new IdentityServerUser(user.GetSubjectId())
+                        {
+                            DisplayName = user.UserName
+                        });
+
+                        // make sure the returnUrl is still valid, and if yes - redirect back to authorize endpoint
+                        if (interaction.IsValidReturnUrl(model.ReturnUrl))
+                        {
+                            return RedirectToLocal(model.ReturnUrl);
+                        }
+
+                        return Redirect("~/Home/Index");
                     }
 
-                    return Redirect("~/");
+                    ModelState.AddModelError("", "Invalid username or password.");
+                    vm = await BuildLoginViewModelAsync(model, canLogin: true);
+                    return View(vm);
                 }
-
-                ModelState.AddModelError("", "Invalid username or password.");
             }
 
             // something went wrong, show form with error
-            var vm = await BuildLoginViewModelAsync(model);
+            vm = await BuildLoginViewModelAsync(model);
             return View(vm);
+
         }
 
         async Task<LoginViewModel> BuildLoginViewModelAsync(string returnUrl, AuthorizationRequest context)
@@ -105,12 +151,13 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Controllers
             };
         }
 
-        async Task<LoginViewModel> BuildLoginViewModelAsync(LoginInputModel model)
+        async Task<LoginViewModel> BuildLoginViewModelAsync(LoginInputModel model, bool canLogin = false)
         {
             var context = await interaction.GetAuthorizationContextAsync(model.ReturnUrl);
             var vm = await BuildLoginViewModelAsync(model.ReturnUrl, context);
             vm.Username = model.Username;
             vm.RememberLogin = model.RememberLogin;
+            vm.CanLogin = canLogin;
             return vm;
         }
 
@@ -187,5 +234,6 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
     }
 }

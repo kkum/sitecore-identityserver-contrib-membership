@@ -13,7 +13,7 @@ namespace IdentityServer4.Contrib.Membership.Interfaces
 
         Task<Membership> FindUserByUsername(string username);
         
-        Task<String> FindUserNameByEmail(string email);
+        Task<string> FindUserNameByEmail(string email);
 
         Task<MembershipSecurity> GetUserPassword(string username);
 

@@ -5,6 +5,6 @@ namespace IdentityServer4.Contrib.Membership.IdsvrDemo.Models
 {
     public class EmailViewModel : EmailInputModel
     {
-        public string Email { get; set; }
+        public bool EnablePasswordReset { get; set; }
     }
 }

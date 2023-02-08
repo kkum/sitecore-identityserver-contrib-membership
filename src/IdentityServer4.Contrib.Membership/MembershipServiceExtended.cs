@@ -13,7 +13,7 @@ namespace IdentityServer4.Contrib.Membership
     using Microsoft.AspNetCore.DataProtection;
 
     /// <summary>Membership Service that performs some of the MembershipProvider read logic</summary>
-    public class MembershipService : IMembershipService
+    public class MembershipServiceExtended : IMembershipService
     {
         private readonly IMembershipRepository membershipRepository;
         private readonly IMembershipPasswordHasher membershipPasswordHasher;
@@ -22,7 +22,7 @@ namespace IdentityServer4.Contrib.Membership
         /// <summary>Constructor</summary>
         /// <param name="membershipRepository">Membership Repository</param>
         /// <param name="membershipPasswordHasher">Membership Password Hasher</param>
-        public MembershipService(IMembershipRepository membershipRepository, IMembershipPasswordHasher membershipPasswordHasher, IDataProtectionProvider protectionProvider)
+        public MembershipServiceExtended(IMembershipRepository membershipRepository, IMembershipPasswordHasher membershipPasswordHasher, IDataProtectionProvider protectionProvider)
         {
             this.membershipRepository = membershipRepository.ThrowIfNull(nameof(membershipRepository));
             this.membershipPasswordHasher = membershipPasswordHasher.ThrowIfNull(nameof(membershipPasswordHasher));
@@ -130,6 +130,7 @@ namespace IdentityServer4.Contrib.Membership
         }
 
         public async Task<string> GenerateResetPasswordTokenAsync(MembershipUser user, string purpose, double lifetimeInDays)
+
         {
 
             string id = Convert.ToString(user.UserId, CultureInfo.InvariantCulture);
@@ -177,16 +178,6 @@ namespace IdentityServer4.Contrib.Membership
             }
             return await Task.FromResult(false);
         }
-
-        //public async Task<bool> ValidateEmailAsync(string email)
-        //{
-        //    var userName = await membershipRepository.FindUserNameByEmail(email).ConfigureAwait(false);
-        //    if (userName == null) return false;
-        //    var user = await membershipRepository.FindUserByUsername(userName).ConfigureAwait(false);
-
-        //    return (bool)(user?.IsApproved);
-        //}
-
 
     }
 }
